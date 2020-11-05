@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
             ContestSeeder::class,
             ParticipationSeeder::class,
             ProblemSeeder::class,
+            CategorySeeder::class,
+            CategoryProblemSeeder::class,
 
         ]);
     }
