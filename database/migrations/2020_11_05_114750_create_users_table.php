@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->integer('cumulative_score')->default(0);
 //            $table->rememberToken();
             $table->unsignedBigInteger('role_id')->nullable();
+            $table->foreign('role_id')->references('id')->on('roles');
             $table->timestamps();
         });
     }

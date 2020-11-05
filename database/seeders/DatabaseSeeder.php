@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Contest;
+use App\Models\Participation;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -17,9 +18,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             RoleSeeder::class,
+            UserSeeder::class,
+            ContestSeeder::class,
+            ParticipationSeeder::class
         ]);
-
-        User::factory(20)->create();
-        Contest::factory(5)->create();
     }
 }

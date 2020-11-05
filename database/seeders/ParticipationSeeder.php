@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Contest;
+use App\Models\Participation;
 use Illuminate\Database\Seeder;
 
-class ContestSeeder extends Seeder
+class ParticipationSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,7 @@ class ContestSeeder extends Seeder
      */
     public function run()
     {
-        Contest::factory(5)->create();
+        //
+        Participation::factory(30)->create();
     }
 }
