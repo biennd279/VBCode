@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             ContestSeeder::class,
-            ParticipationSeeder::class
+            ParticipationSeeder::class,
+            ProblemSeeder::class,
+
         ]);
     }
 }
