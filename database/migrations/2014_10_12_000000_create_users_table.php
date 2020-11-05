@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->date('date_of_birth');
             $table->integer('cumulative_score')->default(0);
 //            $table->rememberToken();
+            $table->unsignedBigInteger('role_id')->nullable();
             $table->timestamps();
         });
     }

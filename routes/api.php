@@ -19,5 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get("/test", function () {
-    return "Hello world";
+    return Illuminate\Http\Resources\Json\ResourceCollection::make(\App\Models\User::with('role:id,role')->get());
 });
