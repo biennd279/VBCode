@@ -2,6 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Contest;
+use App\Models\Participation;
+use App\Models\Submission;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +17,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call([
+            RoleSeeder::class,
+            UserSeeder::class,
+            ContestSeeder::class,
+            ParticipationSeeder::class,
+            ProblemSeeder::class,
+            CategorySeeder::class,
+            CategoryProblemSeeder::class,
+            SubmissionSeeder::class,
+
+        ]);
     }
 }
