@@ -21,7 +21,7 @@ class User extends JsonResource
             'email' => $this->email,
 //            'date_of_birth' => $this->date_of_birth,
             'cumulative_score' => $this->cumulative_score,
-            'role' => $this->whenLoaded('role')->role
+//            'role' => $this->whenLoaded('role')->role
         ];
     }
 }

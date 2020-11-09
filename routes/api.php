@@ -13,11 +13,17 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+//
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
+Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register']);
+
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
+
+    Route::apiResource('users', \App\Http\Controllers\UserController::class);
 });
 
-Route::get("/test", function () {
-    return Illuminate\Http\Resources\Json\ResourceCollection::make(\App\Models\User::with('role:id,role')->get());
-});
