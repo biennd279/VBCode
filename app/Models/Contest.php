@@ -26,6 +26,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Contest whereTimeStart($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contest whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
+ * @property-read int|null $users_count
  */
 class Contest extends Model
 {
@@ -42,4 +44,10 @@ class Contest extends Model
         'time_start' => 'datetime',
         'time_end' => 'datetime'
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'participant')
+            ->using(Participant::class);
+    }
 }

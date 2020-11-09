@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Contest;
-use App\Models\Participation;
+use App\Models\Participant;
 use App\Models\Submission;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             ContestSeeder::class,
-            ParticipationSeeder::class,
+            ParticipantSeeder::class,
             ProblemSeeder::class,
             CategorySeeder::class,
             CategoryProblemSeeder::class,

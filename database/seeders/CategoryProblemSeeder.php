@@ -26,6 +26,5 @@ class CategoryProblemSeeder extends Seeder
                 'updated_at' => date_create()
             ]);
         }
-
     }
 }
