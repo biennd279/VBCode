@@ -15,7 +15,7 @@ class AuthController extends Controller
             'user' => 'required|string|unique:users',
             'name' => 'required|max:55',
             'email' => 'email|required|unique:users',
-            'password' => 'required|confirmed'
+            'password' => 'required|string|min:0'
         ]);
 
         $validatedData['password'] = bcrypt($request->password);
@@ -27,7 +27,7 @@ class AuthController extends Controller
         return response()->json([
             'user' => UserResource::make($user),
             'access_token' => $accessToken
-        ]);
+        ], 201);
     }
 
     public function login(Request $request)
