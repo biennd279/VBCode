@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\User as UserResource;
+use App\Models\Role;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -19,6 +20,8 @@ class AuthController extends Controller
         ]);
 
         $validatedData['password'] = bcrypt($request->password);
+
+        $validatedData['role_id'] = Role::find('student')->id;
 
         $user = User::create($validatedData);
 
