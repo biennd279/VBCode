@@ -19,6 +19,7 @@ class CreateCategoryProblemsTable extends Migration
             $table->foreign('category_id')->references('id')->on('categories');
             $table->unsignedBigInteger('problem_id');
             $table->foreign('problem_id')->references('id')->on('problems');
+            $table->unique(['category_id', 'problem_id']);
             $table->timestamps();
         });
     }
