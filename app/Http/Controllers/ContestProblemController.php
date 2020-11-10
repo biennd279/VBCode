@@ -28,7 +28,14 @@ class ContestProblemController extends Controller
      */
     public function store(Request $request, Contest $contest)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+            'question' => 'required|string',
+            'point' => 'required|alpha_num'
+        ]);
+
+        $problem = $contest->problems()->create($validatedData);
+        return new \App\Http\Resources\Problem($problem);
     }
 
     /**
@@ -40,7 +47,7 @@ class ContestProblemController extends Controller
      */
     public function show(Contest $contest, Problem $problem)
     {
-        //
+        return new \App\Http\Resources\Problem($problem);
     }
 
     /**
@@ -53,7 +60,14 @@ class ContestProblemController extends Controller
      */
     public function update(Request $request, Contest $contest, Problem $problem)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+            'question' => 'required|string',
+            'point' => 'required|alpha_num'
+        ]);
+        $problem->update($validatedData);
+        $problem->save();
+        return new \App\Http\Resources\Problem($problem);
     }
 
     /**
@@ -65,6 +79,9 @@ class ContestProblemController extends Controller
      */
     public function destroy(Contest $contest, Problem $problem)
     {
-        //
+        $problem->delete();
+        return response()->json([
+            'message' => 'remove success'
+        ], 200);
     }
 }
