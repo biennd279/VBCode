@@ -1,14 +1,8 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-<head>
-    <title>Laravel</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="stylesheet" type="text/css" href="../css/app.css">
-</head>
-<body>
-<div id="app">
+@extends('layouts.master')
+@section('header')
+
+@endsection
+
+@section('body')
     <example-component></example-component>
-</div>
-<script src="{{ mix('js/app.js') }}" type="text/javascript"></script>
-</body>
-</html>
+@endsection
