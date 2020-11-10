@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class User extends JsonResource
+class Problem extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,13 +16,9 @@ class User extends JsonResource
     {
         return [
             'id' => $this->id,
-            'user' => $this->user,
             'name' => $this->name,
-            'email' => $this->email,
-//            'date_of_birth' => $this->date_of_birth,
-            'cumulative_score' => $this->cumulative_score,
-            'role'=> $this->when($this->role,$this->role->role),
-
+            'question' => $this->question,
+            'point' => $this->point,
         ];
     }
 }

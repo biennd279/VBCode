@@ -50,4 +50,14 @@ class Contest extends Model
         return $this->belongsToMany(User::class, 'participant')
             ->using(Participant::class);
     }
+
+    public function problems()
+    {
+        return $this->hasMany(Problem::class);
+    }
+
+    public function participants()
+    {
+        return $this->hasMany(Participant::class);
+    }
 }

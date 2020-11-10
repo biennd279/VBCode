@@ -4,5 +4,5 @@
 @endsection
 
 @section('body')
-    <example-component></example-component>
+    <test-component></test-component>
 @endsection
