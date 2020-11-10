@@ -86,4 +86,22 @@ class ContestController extends Controller
 //            'message' => 'Delete success'
 //        ], 202);
     }
+
+    public function join(Contest $contest)
+    {
+        $user = auth()->user();
+        $contest->users()->attach($user);
+        return response()->json([
+            'message' => 'join success',
+        ], 200);
+    }
+
+    public function leave(Contest $contest)
+    {
+        $user = auth()->user();
+        $contest->users()->detach($user);
+        return response()->json([
+            'message' => 'leave success',
+        ], 200);
+    }
 }

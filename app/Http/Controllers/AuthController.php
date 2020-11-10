@@ -21,7 +21,7 @@ class AuthController extends Controller
 
         $validatedData['password'] = bcrypt($request->password);
 
-        $validatedData['role_id'] = Role::find('student')->id;
+        $validatedData['role_id'] = 3;
 
         $user = User::create($validatedData);
 

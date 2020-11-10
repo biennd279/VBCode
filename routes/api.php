@@ -32,6 +32,8 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
 
         Route::apiResource('users', UserController::class);
         Route::apiResource('contests', ContestController::class);
+        Route::post('/contests/{contest}/join', [ContestController::class, 'join']);
+        Route::post('/contests/{contest}/leave', [ContestController::class, 'leave']);
         Route::apiResource('contests.users', ContestUserController::class);
         Route::apiResource('contests.problems', ContestProblemController::class);
     });
