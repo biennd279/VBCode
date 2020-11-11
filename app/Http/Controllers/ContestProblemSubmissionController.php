@@ -53,31 +53,5 @@ class ContestProblemSubmissionController extends Controller
     {
         return \App\Http\Resources\Submission::make($submission);
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param Contest $contest
-     * @param Problem $problem
-     * @param Submission $submission
-     * @return void
-     */
-    public function update(Request $request, Contest $contest, Problem $problem, Submission $submission)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param Problem $problem
-     * @param Contest $contest
-     * @param Submission $submission
-     * @return void
-     */
-    public function destroy(Problem $problem, Contest $contest, Submission $submission)
-    {
-        //
-    }
+    
 }

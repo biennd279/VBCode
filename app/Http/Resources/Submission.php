@@ -16,10 +16,9 @@ class Submission extends JsonResource
     {
         return [
             'id' => $this->id,
-            'file' => $this->file,
             'point' => $this->point,
             'result' => $this->result,
-            'user' => User::make($this->user),
+            'user_id' => $this->user_id,
 
         ];
     }
