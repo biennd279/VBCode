@@ -28,6 +28,10 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
  * @property-read int|null $users_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Participant[] $participants
+ * @property-read int|null $participants_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Problem[] $problems
+ * @property-read int|null $problems_count
  */
 class Contest extends Model
 {

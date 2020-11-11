@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Submission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class SubmissionController extends Controller
 {
@@ -26,6 +28,8 @@ class SubmissionController extends Controller
     public function store(Request $request)
     {
         $path = $request->file('file')->store('submissions');
+        Storage::move($path, $path.'.cpp');
+        $path .= '.cpp';
         $user = auth()->user();
         $problem_id = $request->input('problem_id');
 
@@ -34,6 +38,10 @@ class SubmissionController extends Controller
             'user_id' => $user->getAuthIdentifier(),
             'problem_id' => $problem_id
         ]);
+        \Artisan::call('submission:grade', [
+            'submission_id' => $submission->id
+        ]);
+        $submission->refresh();
         return \App\Http\Resources\Submission::make($submission);
     }
 

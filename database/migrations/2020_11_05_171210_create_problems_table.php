@@ -20,7 +20,7 @@ class CreateProblemsTable extends Migration
             $table->unsignedInteger('point');
             $table->unsignedBigInteger('contest_id');
             $table->foreign('contest_id')->references('id')->on('contests');
-            //$table->string('test_case');
+            $table->string('testcase')->nullable();
             $table->timestamps();
         });
     }

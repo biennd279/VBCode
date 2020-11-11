@@ -29,6 +29,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Problem whereUpdatedAt($value)
  * @mixin \Eloquent
  * @property-read \App\Models\Contest $contest
+ * @property string|null $testcase
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Submission[] $submissions
+ * @property-read int|null $submissions_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Problem whereTestcase($value)
  */
 class Problem extends Model
 {
@@ -39,8 +43,7 @@ class Problem extends Model
         'question',
         'point',
         'contest_id',
-
-        //'test_case'
+        'testcase',
     ];
 
     public function categories()
