@@ -5,6 +5,8 @@ use App\Http\Controllers\ContestController;
 use App\Http\Controllers\ContestProblemController;
 use App\Http\Controllers\ContestProblemSubmissionController;
 use App\Http\Controllers\ContestUserController;
+use App\Http\Controllers\ProblemController;
+use App\Http\Controllers\SubmissionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -41,7 +43,8 @@ Route::group(['middleware' => ['json.response']], function () {
         Route::apiResource('contests.users', ContestUserController::class);
         Route::apiResource('contests.problems', ContestProblemController::class);
         Route::apiResource('contests.problems.submissions', ContestProblemSubmissionController::class);
-        Route::apiResource('problems', \App\Http\Controllers\ProblemController::class);
+        Route::apiResource('problems', ProblemController::class);
+        Route::apiResource('submissions', SubmissionController::class);
     });
 });
 
