@@ -24,7 +24,10 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
-Route::group(['middleware' => ['cors', 'json.response']], function () {
+//Route::group(['middleware' => ['cors', 'json.response']], function () {
+
+
+Route::group(['middleware' => ['json.response']], function () {
     Route::post('/auth/login', [AuthController::class, 'login']);
     Route::post('/auth/register', [AuthController::class, 'register']);
 
@@ -38,6 +41,7 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
         Route::apiResource('contests.users', ContestUserController::class);
         Route::apiResource('contests.problems', ContestProblemController::class);
         Route::apiResource('contests.problems.submissions', ContestProblemSubmissionController::class);
+        Route::apiResource('problems', \App\Http\Controllers\ProblemController::class);
     });
 });
 
