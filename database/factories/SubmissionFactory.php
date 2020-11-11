@@ -24,7 +24,9 @@ class SubmissionFactory extends Factory
     public function definition()
     {
         return [
-            'result' => " ",
+            'result' => "Accepted",
+            'file' => $this->faker->url,
+            'point' => $this->faker->numberBetween(0, 100),
             'user_id' => User::all()->random()->id,
             'problem_id' => Problem::all()->random()->id
         ];

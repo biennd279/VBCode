@@ -52,4 +52,9 @@ class Problem extends Model
     {
         return $this->belongsTo(Contest::class);
     }
+
+    public function submissions()
+    {
+        return $this->hasMany(Submission::class);
+    }
 }

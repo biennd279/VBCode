@@ -33,6 +33,8 @@ class Submission extends Model
 
     protected $fillable = [
         'result',
+        'file',
+        'point',
         'user_id',
         'problem_id'
     ];
