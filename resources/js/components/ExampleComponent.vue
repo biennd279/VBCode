@@ -6,7 +6,7 @@
                     <div class="card-header">Example Component</div>
 
                     <div class="card-body">
-                        I'm an example component.
+                        I'm vbcode
                     </div>
                 </div>
             </div>
@@ -20,5 +20,6 @@
             console.log('Component mounted.')
         }
     }
+
     axios.get('/api/users').then(response => console.log(response));
 </script>
