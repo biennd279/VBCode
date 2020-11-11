@@ -41,6 +41,7 @@ Route::group(['middleware' => ['json.response']], function () {
         Route::apiResource('contests.users', ContestUserController::class);
         Route::apiResource('contests.problems', ContestProblemController::class);
         Route::apiResource('contests.problems.submissions', ContestProblemSubmissionController::class);
+        Route::apiResource('problems', \App\Http\Controllers\ProblemController::class);
     });
 });
 
