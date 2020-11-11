@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Contest;
 use App\Models\Problem;
+use Composer\Package\Archiver\ZipArchiver;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use ZanySoft\Zip\Zip;
 
 class ContestProblemController extends Controller
 {
@@ -28,12 +32,22 @@ class ContestProblemController extends Controller
      */
     public function store(Request $request, Contest $contest)
     {
+        $file = $request->file('file');
+        $folder_path = 'testcases/'.basename($file->hashName(), '.zip');
+        Storage::disk('local')->createDir($folder_path);
+        $path = $file->store('testcases');
+        $zip = new \ZipArchive();
+        $zip->open(Storage::path($path));
+        $zip->extractTo(Storage::path($folder_path));
+        Storage::delete($path);
+
         $validatedData = $request->validate([
             'name' => 'required|string',
             'question' => 'required|string',
-            'point' => 'required|alpha_num'
+            'point' => 'required|alpha_num',
         ]);
 
+        $validatedData['testcase'] = $folder_path;
         $problem = $contest->problems()->create($validatedData);
         return new \App\Http\Resources\Problem($problem);
     }

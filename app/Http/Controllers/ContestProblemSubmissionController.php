@@ -38,6 +38,11 @@ class ContestProblemSubmissionController extends Controller
             'file' => $path,
             'user_id' => $user->getAuthIdentifier(),
         ]);
+
+        \Artisan::call('submission:grade', [
+            'submission_id' => $submission->id
+        ]);
+        $submission->refresh();
         return \App\Http\Resources\Submission::make($submission);
     }
 
@@ -53,5 +58,5 @@ class ContestProblemSubmissionController extends Controller
     {
         return \App\Http\Resources\Submission::make($submission);
     }
-    
+
 }

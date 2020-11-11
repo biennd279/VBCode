@@ -26,6 +26,10 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property-read \App\Models\Problem $problem
  * @property-read \App\Models\User $user
+ * @property string $file
+ * @property int|null $point
+ * @method static \Illuminate\Database\Eloquent\Builder|Submission whereFile($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Submission wherePoint($value)
  */
 class Submission extends Model
 {
