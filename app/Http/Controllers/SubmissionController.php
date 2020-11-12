@@ -16,7 +16,7 @@ class SubmissionController extends Controller
      */
     public function index()
     {
-        return \App\Http\Resources\Submission::collection(Submission::all());
+        return \App\Http\Resources\Submission::collection(Submission::paginate(10));
     }
 
     /**

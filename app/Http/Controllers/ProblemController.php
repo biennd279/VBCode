@@ -14,7 +14,7 @@ class ProblemController extends Controller
      */
     public function index()
     {
-        return \App\Http\Resources\Problem::collection(Problem::all());
+        return \App\Http\Resources\Problem::collection(Problem::paginate(10));
     }
 
     /**

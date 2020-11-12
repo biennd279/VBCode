@@ -17,7 +17,7 @@ class ContestController extends Controller
      */
     public function index()
     {
-        return ContestResource::collection(Contest::all());
+        return ContestResource::collection(Contest::paginate(10));
     }
 
     /**
