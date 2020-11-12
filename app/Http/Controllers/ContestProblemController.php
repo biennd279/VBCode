@@ -20,7 +20,7 @@ class ContestProblemController extends Controller
      */
     public function index(Contest $contest)
     {
-        return \App\Http\Resources\Problem::collection($contest->problems);
+        return \App\Http\Resources\Problem::collection($contest->problems()->paginate(10));
     }
 
     /**

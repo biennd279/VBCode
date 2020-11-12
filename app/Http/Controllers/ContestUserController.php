@@ -16,7 +16,7 @@ class ContestUserController extends Controller
      */
     public function index(Contest $contest)
     {
-        return \App\Http\Resources\User::collection($contest->users);
+        return \App\Http\Resources\User::collection($contest->users()->paginate(10));
     }
 
     /**
