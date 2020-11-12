@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class Problem extends JsonResource
+class Category extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,11 +15,7 @@ class Problem extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'question' => $this->question,
-            'point' => $this->point,
-            'categories' => Category::collection($this->categories),
+            'category' => $this->category,
         ];
     }
 }
