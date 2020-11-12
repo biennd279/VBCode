@@ -10,10 +10,18 @@ class ProblemController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index()
+    public function index(Request $request)
     {
+        $category = $request->input('category');
+        if ($category) {
+            return \App\Http\Resources\Problem::collection(Problem::whereHas('categories',
+                function ($query) use ($category) {
+                    $query->where('category', $category);
+                })->paginate(10));
+        }
         return \App\Http\Resources\Problem::collection(Problem::paginate(10));
     }
 
