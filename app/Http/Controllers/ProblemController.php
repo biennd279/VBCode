@@ -15,12 +15,12 @@ class ProblemController extends Controller
      */
     public function index(Request $request)
     {
-        $category = $request->input('category');
+        $category = request()->query('category');
         if ($category) {
             return \App\Http\Resources\Problem::collection(Problem::whereHas('categories',
                 function ($query) use ($category) {
                     $query->where('category', $category);
-                })->paginate(10));
+                })->paginate(10)->withQueryString());
         }
         return \App\Http\Resources\Problem::collection(Problem::paginate(10));
     }
