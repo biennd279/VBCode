@@ -15,7 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return JsonResource::collection(Category::paginate(10));
+        return \App\Http\Resources\Category::collection(Category::paginate(10));
     }
 
     /**
