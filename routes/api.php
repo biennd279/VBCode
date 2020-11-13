@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContestController;
 use App\Http\Controllers\ContestProblemController;
 use App\Http\Controllers\ContestProblemSubmissionController;
@@ -45,6 +46,7 @@ Route::group(['middleware' => ['json.response']], function () {
         Route::apiResource('contests.problems.submissions', ContestProblemSubmissionController::class);
         Route::apiResource('problems', ProblemController::class);
         Route::apiResource('submissions', SubmissionController::class);
+        Route::apiResource('categories', CategoryController::class);
     });
 });
 
