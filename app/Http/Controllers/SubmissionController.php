@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\GradeSubmission;
 use App\Models\Submission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -35,13 +36,13 @@ class SubmissionController extends Controller
 
         $submission = Submission::create([
             'file' => $path,
+            'status' => 'Pending',
             'user_id' => $user->getAuthIdentifier(),
             'problem_id' => $problem_id
         ]);
-        \Artisan::call('submission:grade', [
-            'submission_id' => $submission->id
-        ]);
-        $submission->refresh();
+
+        GradeSubmission::dispatch($submission);
+
         return \App\Http\Resources\Submission::make($submission);
     }
 

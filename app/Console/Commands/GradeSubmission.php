@@ -50,12 +50,20 @@ class GradeSubmission extends Command
         $testcase = Storage::path($problems->testcase);
         $file = Storage::path($submission->file);
 
-        $process = new Process(["./grading_service/main",
-            '--test', $testcase,
+        $process = new Process(["./grading_service",
+            '--testcase', $testcase,
             '--file', $file,
             '--timeout', 1]);
+        $process->setWorkingDirectory(app_path());
+        $process->setEnv([
+            'PATH' => '/usr/lib/gcc/x86_64-linux-gnu/9:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:'
+        ]);
 
         $process->run();
+
+        if (!$process->isSuccessful()) {
+            dd($process->getErrorOutput());
+        }
 
         $output = json_decode(trim($process->getOutput()), true);
 
@@ -64,11 +72,13 @@ class GradeSubmission extends Command
         $wrong_tests = $output['wrong_tests'];
         $message = $output['message'];
 
-        $submission->result = "Accepted";
+        $submission->status = "Accepted";
         $submission->point = 100 * (int) $passed_tests / $total_tests;
 
         if ($passed_tests < $total_tests) {
             $submission->result = "Wrong at test {$wrong_tests}/{$total_tests}";
+        } else {
+            $submission->result = "Correct answer";
         }
 
         $submission->save();
