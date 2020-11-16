@@ -36,16 +36,12 @@ class SubmissionController extends Controller
 
         $submission = Submission::create([
             'file' => $path,
+            'status' => 'Pending',
             'user_id' => $user->getAuthIdentifier(),
             'problem_id' => $problem_id
         ]);
 
-//        GradeSubmission::dispatch($submission);
-        \Artisan::call('submission:grade', [
-            'submission_id' => $submission->id,
-        ]);
-
-        $submission->refresh();
+        GradeSubmission::dispatch($submission);
 
         return \App\Http\Resources\Submission::make($submission);
     }

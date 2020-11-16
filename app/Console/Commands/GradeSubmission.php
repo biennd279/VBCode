@@ -72,11 +72,13 @@ class GradeSubmission extends Command
         $wrong_tests = $output['wrong_tests'];
         $message = $output['message'];
 
-        $submission->result = "Accepted";
+        $submission->status = "Accepted";
         $submission->point = 100 * (int) $passed_tests / $total_tests;
 
         if ($passed_tests < $total_tests) {
             $submission->result = "Wrong at test {$wrong_tests}/{$total_tests}";
+        } else {
+            $submission->result = "Correct answer";
         }
 
         $submission->save();

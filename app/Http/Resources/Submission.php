@@ -17,6 +17,7 @@ class Submission extends JsonResource
         return [
             'id' => $this->id,
             'point' => $this->point,
+            'status' => $this->status,
             'result' => $this->result,
             'user_id' => $this->user_id,
 
