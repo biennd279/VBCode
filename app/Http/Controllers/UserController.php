@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Resources\User as UserResource;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserController extends Controller
 {
@@ -47,5 +48,13 @@ class UserController extends Controller
         $user->update($validatedData);
         $user->save();
         return new UserResource($user);
+    }
+
+    public function leaderboard()
+    {
+        return JsonResource::collection(User::query()->select(['id', 'user', 'name', 'cumulative_score'])
+            ->without('role')
+            ->orderBy('cumulative_score', 'desc')
+            ->paginate(10));
     }
 }

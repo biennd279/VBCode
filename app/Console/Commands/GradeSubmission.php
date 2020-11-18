@@ -43,11 +43,11 @@ class GradeSubmission extends Command
     {
         $submission_id = $this->argument('submission_id');
         $submission = Submission::findOrFail($submission_id);
-        $problems = Problem::findOrFail($submission->problem_id);
+        $problem = Problem::findOrFail($submission->problem_id);
 
         $submission->point = 100;
 
-        $testcase = Storage::path($problems->testcase);
+        $testcase = Storage::path($problem->testcase);
         $file = Storage::path($submission->file);
 
         $process = new Process(["./grading_service",
@@ -81,6 +81,16 @@ class GradeSubmission extends Command
             $submission->result = "Correct answer";
         }
 
+        $old_point = $problem->submissions()
+            ->where('user_id', '=', $submission->user_id)
+            ->max('point');
+
+        if ($submission->point > $old_point) {
+            $submission->user->cumulative_score -= $old_point;
+            $submission->user->cumulative_score += $submission->point;
+        }
+
         $submission->save();
+        $submission->user->save();
     }
 }
