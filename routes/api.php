@@ -47,6 +47,7 @@ Route::group(['middleware' => ['json.response']], function () {
         Route::apiResource('problems', ProblemController::class);
         Route::apiResource('submissions', SubmissionController::class);
         Route::apiResource('categories', CategoryController::class);
+        Route::get('/leaderboard', [UserController::class, 'leaderboard']);
     });
 });
 
