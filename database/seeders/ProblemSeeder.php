@@ -14,6 +14,6 @@ class ProblemSeeder extends Seeder
      */
     public function run()
     {
-        Problem::factory(25)->create();
+        Problem::factory(15)->create();
     }
 }

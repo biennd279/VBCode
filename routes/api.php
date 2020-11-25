@@ -37,17 +37,29 @@ Route::group(['middleware' => ['json.response']], function () {
     Route::group(['middleware' => 'auth:api'], function () {
         Route::post('/auth/logout', [AuthController::class, 'logout']);
 
-        Route::apiResource('users', UserController::class);
-        Route::apiResource('contests', ContestController::class);
+        Route::apiResource('users', UserController::class)
+            ->only(['index', 'show', 'update']);
+        Route::apiResource('contests', ContestController::class)
+            ->only(['index', 'store', 'show', 'update']);
         Route::post('/contests/{contest}/join', [ContestController::class, 'join']);
         Route::post('/contests/{contest}/leave', [ContestController::class, 'leave']);
-        Route::apiResource('contests.users', ContestUserController::class);
-        Route::apiResource('contests.problems', ContestProblemController::class);
-        Route::apiResource('contests.problems.submissions', ContestProblemSubmissionController::class);
-        Route::apiResource('problems', ProblemController::class);
-        Route::apiResource('submissions', SubmissionController::class);
-        Route::apiResource('categories', CategoryController::class);
+        Route::apiResource('contests.users', ContestUserController::class)
+            ->only(['index']);
+        Route::apiResource('contests.problems', ContestProblemController::class)
+            ->only(['index', 'store', 'show', 'update']);
+        Route::apiResource('contests.problems.submissions', ContestProblemSubmissionController::class)
+            ->only(['index', 'store', 'show']);
+        Route::apiResource('problems', ProblemController::class)
+            ->only(['index', 'show']);
+        Route::apiResource('submissions', SubmissionController::class)
+            ->only(['index', 'store', 'show']);
+        Route::apiResource('categories', CategoryController::class)
+            ->only(['index']);
         Route::get('/leaderboard', [UserController::class, 'leaderboard']);
+        Route::get('/problems/{problem}/history', [ProblemController::class, 'getHistory']);
+        Route::get('/problems/{problem}/point', [ProblemController::class, 'getPoint']);
+        Route::get('/contests/{contest}/result', [ContestController::class, 'getResult']);
+        Route::get('/contests/{contest}/leaderboard', [ContestController::class, 'getLeaderboard']);
     });
 });
 

@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Resources\User;
 use App\Models\Contest;
 use App\Http\Resources\Contest as ContestResource;
+use App\Models\Submission;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\DB;
 
 class ContestController extends Controller
 {
@@ -103,5 +105,37 @@ class ContestController extends Controller
         return response()->json([
             'message' => 'leave success',
         ], 200);
+    }
+
+    public function getResult(Contest $contest)
+    {
+        $user = auth()->user();
+        $submissions = Submission::select('problem_id')
+            ->selectRaw('max(submissions.point) as point')
+            ->join('problems', 'problems.id', '=', 'submissions.problem_id')
+            ->where('contest_id', '=', $contest->id)
+            ->where('user_id', '=', $user->id)
+            ->groupBy('problems.id')
+            ->orderBy('problems.id')
+            ->get();
+        return JsonResource::make($submissions);
+    }
+
+    public function getLeaderboard(Contest $contest)
+    {
+        $submission = DB::table(function ($query) use ($contest) {
+            $query->select('user_id')
+                ->selectRaw('problem_id, ifnull(max(submissions.point), 0) as point')
+                ->fromRaw('submissions use key (`PRIMARY`) use index (submissions_user_problem_point)')
+                ->join('problems', 'problems.id', '=', 'submissions.problem_id')
+                ->where('contest_id', '=', $contest->id)
+                ->groupBy('user_id', 'problem_id');
+        })->select('user_id')
+        ->selectRaw('sum(point) as total_points')
+        ->groupBy('user_id')
+        ->orderByRaw('total_points desc')
+        ->get();
+
+        return JsonResource::make($submission);
     }
 }
