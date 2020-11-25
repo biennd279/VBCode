@@ -18,7 +18,7 @@ class ParticipantSeeder extends Seeder
         $users = User::all();
         $contests = Contest::all();
         $contests->each(function (Contest $contest) use ($users) {
-           $contest->users()->sync($users->random(rand(1, 4))->pluck('id')->toArray());
+           $contest->users()->sync($users->pluck('id')->toArray());
         });
     }
 }

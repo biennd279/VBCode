@@ -14,6 +14,6 @@ class ContestSeeder extends Seeder
      */
     public function run()
     {
-        Contest::factory(5)->create();
+        Contest::factory(1)->create();
     }
 }

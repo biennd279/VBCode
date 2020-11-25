@@ -26,7 +26,7 @@ class ProblemFactory extends Factory
             'name' => $this->faker->firstName,
             'question' => $this->faker->text,
             'point' => $this->faker->numberBetween(100, 200),
-            'contest_id' => Contest::all()->random(),
+            'contest_id' => Contest::first(),
         ];
     }
 }
