@@ -56,6 +56,10 @@ Route::group(['middleware' => ['json.response']], function () {
         Route::apiResource('categories', CategoryController::class)
             ->only(['index']);
         Route::get('/leaderboard', [UserController::class, 'leaderboard']);
+        Route::get('/problems/{problem}/history', [ProblemController::class, 'getHistory']);
+        Route::get('/problems/{problem}/point', [ProblemController::class, 'getPoint']);
+        Route::get('/contests/{contest}/result', [ContestController::class, 'getResult']);
+        Route::get('/contests/{contest}/leaderboard', [ContestController::class, 'getLeaderboard']);
     });
 });
 
